@@ -133,4 +133,6 @@ void AMyTempleRunCharacter::Look(const FInputActionValue& Value)
 void AMyTempleRunCharacter::Roll(const FInputActionValue& Value)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, TEXT("Roll"));
+
+	GetCharacterMovement()->Launch(GetCapsuleComponent()->GetForwardVector()*10000.f);
 }
