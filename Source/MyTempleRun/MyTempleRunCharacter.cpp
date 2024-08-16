@@ -136,5 +136,25 @@ void AMyTempleRunCharacter::Roll(const FInputActionValue& Value)
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, TEXT("Roll"));
 
 	/*GetCharacterMovement()->Launch(GetCapsuleComponent()->GetForwardVector()*10000.f);*/
-
+	/*if (BP_RushProjectile != nullptr)
+	{
+		auto distance = 40.f;
+		auto spawnLoc = GetActorLocation() + GetActorForwardVector() * distance;
+		auto b = GetWorld()->SpawnActor<ARushProjectile>(BP_RushProjectile, spawnLoc, GetActorRotation());
+		if (b != nullptr)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, TEXT("Projectile Spawn."));
+		}
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Class Access Fail."));
+	}*/
+	auto distance = 40.f;
+	auto spawnLoc = GetActorLocation() + GetActorForwardVector() * distance;
+	auto b = GetWorld()->SpawnActor<ARushProjectile>(ARushProjectile::StaticClass(), spawnLoc, GetActorRotation());
+	if (b != nullptr)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, TEXT("Projectile Spawn."));
+	}
 }
