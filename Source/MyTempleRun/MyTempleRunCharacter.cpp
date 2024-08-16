@@ -10,8 +10,8 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
-#include "RushProjectile.h"
-#include "UObject/ConstructorHelpers.h"
+//#include "Engine/World.h"
+#include "DrawDebugHelpers.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -55,10 +55,8 @@ AMyTempleRunCharacter::AMyTempleRunCharacter()
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 
-	static ConstructorHelpers::FClassFinder<ARushProjectile> BP_RushProjectile(TEXT("/Game/Mine/BP_RushProjectile.BP_RushProjectile"));
-	if (BP_RushProjectile.Class)
-		ProjectileClass = BP_RushProjectile.Class;
-
+	LinetraceIgnoreArray.AddUnique(this);
+	CollisionQueryParams.AddIgnoredActors(LinetraceIgnoreArray);
 }
 
 void AMyTempleRunCharacter::BeginPlay()
@@ -139,24 +137,12 @@ void AMyTempleRunCharacter::Look(const FInputActionValue& Value)
 
 void AMyTempleRunCharacter::Roll(const FInputActionValue& Value)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, TEXT("Roll"));
-
-	/*GetCharacterMovement()->Launch(GetCapsuleComponent()->GetForwardVector()*10000.f);*/
-	/*if (ProjectileClass != nullptr)
+	auto startLoc = GetActorLocation();
+	auto endLoc = GetActorLocation() + GetActorForwardVector() * 300.f;
+	GetWorld()->LineTraceSingleByChannel(HitResult, startLoc, endLoc, ECollisionChannel::ECC_Visibility, CollisionQueryParams);
+	DrawDebugLine(GetWorld(), startLoc, endLoc, FColor::Red, false, 1.5f, (uint8)0U, 1.5f);
+	if (HitResult.bBlockingHit)
 	{
-		auto distance = 40.f;
-		auto spawnLoc = GetActorLocation() + GetActorForwardVector() * distance;
-		auto b = GetWorld()->SpawnActor<ARushProjectile>(ProjectileClass, spawnLoc, GetActorRotation());
-		if (b != nullptr)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, TEXT("Projectile Spawn."));
-		}
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Hit"));
 	}
-	else
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Class Access Fail."));
-	}*/
-	auto distance = 40.f;
-	auto spawnLoc = GetActorLocation() + GetActorForwardVector() * distance;
-	auto b = GetWorld()->SpawnActor<ARushProjectile>(ARushProjectile::StaticClass(), spawnLoc, GetActorRotation());
 }

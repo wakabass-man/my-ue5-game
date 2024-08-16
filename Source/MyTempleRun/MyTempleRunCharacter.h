@@ -12,7 +12,6 @@ class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
-class ARushProjectile;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -45,6 +44,13 @@ class AMyTempleRunCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hit, meta = (AllowPrivateAccess = "true"))
+	FHitResult HitResult;
+
+	FCollisionQueryParams CollisionQueryParams;
+
+	TArray<AActor*>LinetraceIgnoreArray;
+
 public:
 	AMyTempleRunCharacter();
 	
@@ -73,7 +79,4 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, category = Projectile)
-	UClass* ProjectileClass;
 };
