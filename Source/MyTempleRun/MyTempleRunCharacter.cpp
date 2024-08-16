@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "RushProjectile.h"
+#include "UObject/ConstructorHelpers.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -53,6 +54,11 @@ AMyTempleRunCharacter::AMyTempleRunCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+
+	static ConstructorHelpers::FClassFinder<ARushProjectile> BP_RushProjectile(TEXT("/Game/Mine/BP_RushProjectile.BP_RushProjectile"));
+	if (BP_RushProjectile.Class)
+		ProjectileClass = BP_RushProjectile.Class;
+
 }
 
 void AMyTempleRunCharacter::BeginPlay()
@@ -136,11 +142,11 @@ void AMyTempleRunCharacter::Roll(const FInputActionValue& Value)
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, TEXT("Roll"));
 
 	/*GetCharacterMovement()->Launch(GetCapsuleComponent()->GetForwardVector()*10000.f);*/
-	/*if (BP_RushProjectile != nullptr)
+	/*if (ProjectileClass != nullptr)
 	{
 		auto distance = 40.f;
 		auto spawnLoc = GetActorLocation() + GetActorForwardVector() * distance;
-		auto b = GetWorld()->SpawnActor<ARushProjectile>(BP_RushProjectile, spawnLoc, GetActorRotation());
+		auto b = GetWorld()->SpawnActor<ARushProjectile>(ProjectileClass, spawnLoc, GetActorRotation());
 		if (b != nullptr)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, TEXT("Projectile Spawn."));
@@ -153,8 +159,4 @@ void AMyTempleRunCharacter::Roll(const FInputActionValue& Value)
 	auto distance = 40.f;
 	auto spawnLoc = GetActorLocation() + GetActorForwardVector() * distance;
 	auto b = GetWorld()->SpawnActor<ARushProjectile>(ARushProjectile::StaticClass(), spawnLoc, GetActorRotation());
-	if (b != nullptr)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, TEXT("Projectile Spawn."));
-	}
 }

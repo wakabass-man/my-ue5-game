@@ -16,7 +16,7 @@ ARushProjectile::ARushProjectile()
 	SphereCollision->SetCollisionProfileName(FName("RushProjectile"));
 	SphereCollision->SetSimulatePhysics(true);
 	/*SphereCollision->SetNotifyRigidBodyCollision(true);*/
-	SphereCollision->SetMassOverrideInKg(FName(NAME_None), 500.f);/////////////////////////////////////////////
+	SphereCollision->SetMassOverrideInKg(FName(NAME_None), 500.f);
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovemnet"));
 	ProjectileMovement->InitialSpeed = 1500.f;
