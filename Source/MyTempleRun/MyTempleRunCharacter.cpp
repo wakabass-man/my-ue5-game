@@ -10,6 +10,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "RushProjectile.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -134,5 +135,6 @@ void AMyTempleRunCharacter::Roll(const FInputActionValue& Value)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, TEXT("Roll"));
 
-	GetCharacterMovement()->Launch(GetCapsuleComponent()->GetForwardVector()*10000.f);
+	/*GetCharacterMovement()->Launch(GetCapsuleComponent()->GetForwardVector()*10000.f);*/
+
 }
