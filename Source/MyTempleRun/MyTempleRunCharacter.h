@@ -12,6 +12,7 @@ class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+class ARushProjectile;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -34,7 +35,7 @@ class AMyTempleRunCharacter : public ACharacter
 
 	/** Jump Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* RollAction;
+	UInputAction* PunchAction;
 
 	/** Move Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -44,12 +45,6 @@ class AMyTempleRunCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hit, meta = (AllowPrivateAccess = "true"))
-	FHitResult HitResult;
-
-	FCollisionQueryParams CollisionQueryParams;
-
-	TArray<AActor*>LinetraceIgnoreArray;
 
 public:
 	AMyTempleRunCharacter();
@@ -63,7 +58,8 @@ protected:
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 
-	void Roll(const FInputActionValue& Value);
+	UFUNCTION(BlueprintImplementableEvent)
+	void Punch(const FInputActionValue& Value);
 			
 
 protected:

@@ -10,8 +10,6 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
-//#include "Engine/World.h"
-#include "DrawDebugHelpers.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -54,9 +52,6 @@ AMyTempleRunCharacter::AMyTempleRunCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
-
-	LinetraceIgnoreArray.AddUnique(this);
-	CollisionQueryParams.AddIgnoredActors(LinetraceIgnoreArray);
 }
 
 void AMyTempleRunCharacter::BeginPlay()
@@ -85,7 +80,7 @@ void AMyTempleRunCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 		//// Jumping
 		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
-		EnhancedInputComponent->BindAction(RollAction, ETriggerEvent::Triggered, this, &AMyTempleRunCharacter::Roll);
+		EnhancedInputComponent->BindAction(PunchAction, ETriggerEvent::Triggered, this, &AMyTempleRunCharacter::Punch);
 
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMyTempleRunCharacter::Move);
@@ -132,17 +127,5 @@ void AMyTempleRunCharacter::Look(const FInputActionValue& Value)
 		// add yaw and pitch input to controller
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
-	}
-}
-
-void AMyTempleRunCharacter::Roll(const FInputActionValue& Value)
-{
-	auto startLoc = GetActorLocation();
-	auto endLoc = GetActorLocation() + GetActorForwardVector() * 300.f;
-	GetWorld()->LineTraceSingleByChannel(HitResult, startLoc, endLoc, ECollisionChannel::ECC_Visibility, CollisionQueryParams);
-	DrawDebugLine(GetWorld(), startLoc, endLoc, FColor::Red, false, 1.5f, (uint8)0U, 1.5f);
-	if (HitResult.bBlockingHit)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Hit"));
 	}
 }

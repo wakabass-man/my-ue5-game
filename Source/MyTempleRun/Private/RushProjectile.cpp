@@ -15,13 +15,10 @@ ARushProjectile::ARushProjectile()
 	SphereCollision->SetSphereRadius(35.f);
 	SphereCollision->SetCollisionProfileName(FName("RushProjectile"));
 	SphereCollision->SetSimulatePhysics(true);
-	/*SphereCollision->SetNotifyRigidBodyCollision(true);*/
-	SphereCollision->SetMassOverrideInKg(FName(NAME_None), 500.f);
+	SphereCollision->SetNotifyRigidBodyCollision(true);
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovemnet"));
-	ProjectileMovement->InitialSpeed = 1500.f;
-
-	SetLifeSpan(5.f);
+	ProjectileMovement->InitialSpeed = 3000.f;
 }
 
 // Called when the game starts or when spawned
