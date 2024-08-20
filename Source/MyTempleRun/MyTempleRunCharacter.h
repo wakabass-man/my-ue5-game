@@ -45,6 +45,10 @@ class AMyTempleRunCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	/** Look Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* JumpAction;
+
 
 public:
 	AMyTempleRunCharacter();
@@ -59,8 +63,7 @@ protected:
 	void Look(const FInputActionValue& Value);
 
 	UFUNCTION(BlueprintImplementableEvent)
-	void Punch(const FInputActionValue& Value);
-			
+	void Punch(const FInputActionValue& Value);	
 
 protected:
 	// APawn interface
