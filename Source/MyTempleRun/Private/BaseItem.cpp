@@ -18,6 +18,8 @@ ABaseItem::ABaseItem()
 	/*SphereCollision->BodyInstance.SetCollisionProfileName("OverlapAllDynamic");*/
 	SphereCollision->SetCollisionProfileName("OverlapAllDynamic");
 	RotatingComponent = CreateDefaultSubobject<URotatingMovementComponent>(TEXT("RotatingMovement"));
+
+	ItemCnt = 0;
 }
 
 // Called when the game starts or when spawned
@@ -41,6 +43,7 @@ void ABaseItem::BeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherA
 	if (class AMyTempleRunCharacter* Player = Cast<AMyTempleRunCharacter>(OtherActor))
 	{
 		Player->Inventory.Emplace(this);
+		ItemCnt++;
 		Destroy();
 	}
 }
