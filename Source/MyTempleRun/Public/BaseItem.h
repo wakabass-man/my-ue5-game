@@ -36,9 +36,6 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Rotating, Meta = (AllowPrivateAccess = "true"))
 	URotatingMovementComponent* RotatingComponent;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Image, Meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Image, Meta = (AllowPrivateAccess = "true"))
 	UTexture2D* ItemImage;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Count, Meta = (AllowPrivateAccess = "true"))
-	int32 ItemCnt;
 };
