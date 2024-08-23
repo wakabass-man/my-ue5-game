@@ -36,9 +36,9 @@ void ABaseItem::Tick(float DeltaTime)
 void ABaseItem::BeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (class AMyTempleRunCharacter* Player = Cast<AMyTempleRunCharacter>(OtherActor))
+	if (AMyTempleRunCharacter* Player = Cast<AMyTempleRunCharacter>(OtherActor))
 	{
-		Player->GetInventory().Add(this);
+		Player->GetInventory().Emplace(this);
 		for (auto e : Player->GetInventory())
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("@@@@"));
