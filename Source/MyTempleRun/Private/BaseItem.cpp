@@ -23,7 +23,7 @@ void ABaseItem::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	SphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABaseItem::BeginOverlap);
+	/*SphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABaseItem::BeginOverlap);*/
 }
 
 // Called every frame
@@ -33,16 +33,13 @@ void ABaseItem::Tick(float DeltaTime)
 
 }
 
-void ABaseItem::BeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
-	if (AMyTempleRunCharacter* Player = Cast<AMyTempleRunCharacter>(OtherActor))
-	{
-		Player->GetInventory().Emplace(this);
-		for (auto e : Player->GetInventory())
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("@@@@"));
-		}
-		Destroy();
-	}
-}
+//void ABaseItem::BeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+//	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+//{
+//	if (AMyTempleRunCharacter* Player = Cast<AMyTempleRunCharacter>(OtherActor))
+//	{
+//		Player->GetInventory().Emplace(this);
+//		Player->UpdateInventory()
+//		Destroy();
+//	}
+//}

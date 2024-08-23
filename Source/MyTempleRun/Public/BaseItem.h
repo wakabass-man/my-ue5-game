@@ -22,12 +22,15 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Image, Meta = (AllowPrivateAccess = "true"))
+	UTexture2D* ItemImage;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION()
-	void BeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	/*UFUNCTION()
+	void BeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);*/
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Collision, Meta = (AllowPrivateAccess = "true"))
@@ -35,7 +38,4 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Rotating, Meta = (AllowPrivateAccess = "true"))
 	URotatingMovementComponent* RotatingComponent;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Image, Meta = (AllowPrivateAccess = "true"))
-	UTexture2D* ItemImage;
 };

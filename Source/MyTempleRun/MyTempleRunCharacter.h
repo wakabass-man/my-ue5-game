@@ -50,9 +50,6 @@ class AMyTempleRunCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* JumpAction;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Inventory, meta = (AllowPrivateAccess = "true"))
-	TArray<ABaseItem*> Inventory;
-
 public:
 	AMyTempleRunCharacter();
 	
@@ -68,6 +65,9 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent)
 	void Punch(const FInputActionValue& Value);	
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Inventory)
+	TArray<ABaseItem*> Inventory;
+
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -75,11 +75,11 @@ protected:
 	// To add mapping context
 	virtual void BeginPlay();
 
-
 public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
-	FORCEINLINE TArray<ABaseItem*> GetInventory() { return Inventory; }
+
+	/*FORCEINLINE TArray<ABaseItem*>& GetInventory() { return Inventory; }*/
 };
