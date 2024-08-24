@@ -16,6 +16,8 @@ ABaseItem::ABaseItem()
 	SphereCollision = CreateDefaultSubobject<USphereComponent>(TEXT("SphereCollision"));
 	SphereCollision->SetSphereRadius(64.f);
 	RotatingComponent = CreateDefaultSubobject<URotatingMovementComponent>(TEXT("RotatingMovement"));
+
+	ItemType = EItemType::Bullet;
 }
 
 // Called when the game starts or when spawned

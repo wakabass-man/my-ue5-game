@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "MyTempleRun/MyTempleRun.h"
 #include "BaseItem.generated.h"
 
 class USphereComponent;
@@ -24,6 +25,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Image, Meta = (AllowPrivateAccess = "true"))
 	UTexture2D* ItemImage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = ItemType, Meta = (AllowPrivateAccess = "true"))
+	EItemType ItemType;
 
 public:	
 	// Called every frame
