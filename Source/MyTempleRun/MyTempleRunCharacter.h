@@ -14,6 +14,7 @@ class UInputAction;
 struct FInputActionValue;
 //class ARushProjectile;
 class ABaseItem;
+class ABaseWeapon;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -82,4 +83,10 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
 	/*FORCEINLINE TArray<ABaseItem*>& GetInventory() { return Inventory; }*/
+
+	UFUNCTION(BlueprintCallable)
+	void AttachWeapon(const FName& InputEquipSocketName, ABaseWeapon* InputWeapon);
+
+	UFUNCTION(BlueprintCallable)
+	ABaseWeapon* SpawnWeapon(UClass* InputWeaponClass);
 };

@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "BaseItem.h"
+#include "BaseWeapon.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -68,6 +69,19 @@ void AMyTempleRunCharacter::BeginPlay()
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
 	}
+}
+
+ABaseWeapon* AMyTempleRunCharacter::SpawnWeapon(UClass* InputWeaponClass)
+{
+	FActorSpawnParameters spawnParams;
+	spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+	return GetWorld()->SpawnActor<ABaseWeapon>(InputWeaponClass, spawnParams);
+}
+
+void AMyTempleRunCharacter::AttachWeapon(const FName& InputEquipSocketName, ABaseWeapon* InputWeapon)
+{
+	InputWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, InputEquipSocketName);
 }
 
 //////////////////////////////////////////////////////////////////////////

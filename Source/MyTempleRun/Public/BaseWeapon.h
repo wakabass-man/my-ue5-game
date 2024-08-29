@@ -25,4 +25,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Socket)
 	TArray<FName> EquipSocketNames;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Damage)
+	float Damage;
 };
