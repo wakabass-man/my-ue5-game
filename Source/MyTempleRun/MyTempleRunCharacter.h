@@ -37,7 +37,7 @@ class AMyTempleRunCharacter : public ACharacter
 
 	/** Jump Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* PunchAction;
+	UInputAction* UnequipAction;
 
 	/** Move Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -51,6 +51,9 @@ class AMyTempleRunCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* JumpAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* EquipAction;
+
 public:
 	AMyTempleRunCharacter();
 	
@@ -63,8 +66,14 @@ protected:
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 
-	UFUNCTION(BlueprintImplementableEvent)
-	void Punch(const FInputActionValue& Value);	
+	/*UFUNCTION(BlueprintImplementableEvent)
+	void Fire(const FInputActionValue& Value);	*/
+
+	UFUNCTION(BlueprintCallable)
+	void Equip(const FInputActionValue& Value);
+
+	UFUNCTION(BlueprintCallable)
+	void Unequip(const FInputActionValue& Value);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Inventory)
 	TArray<ABaseItem*> Inventory;

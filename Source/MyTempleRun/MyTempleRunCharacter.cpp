@@ -95,13 +95,16 @@ void AMyTempleRunCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 		//// Jumping
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
-		EnhancedInputComponent->BindAction(PunchAction, ETriggerEvent::Triggered, this, &AMyTempleRunCharacter::Punch);
+
+		EnhancedInputComponent->BindAction(UnequipAction, ETriggerEvent::Triggered, this, &AMyTempleRunCharacter::Unequip);
 
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMyTempleRunCharacter::Move);
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMyTempleRunCharacter::Look);
+
+		EnhancedInputComponent->BindAction(EquipAction, ETriggerEvent::Triggered, this, &AMyTempleRunCharacter::Equip);
 	}
 	else
 	{
@@ -143,4 +146,14 @@ void AMyTempleRunCharacter::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void AMyTempleRunCharacter::Equip(const FInputActionValue& Value)
+{
+
+}
+
+void AMyTempleRunCharacter::Unequip(const FInputActionValue& Value)
+{
+
 }
