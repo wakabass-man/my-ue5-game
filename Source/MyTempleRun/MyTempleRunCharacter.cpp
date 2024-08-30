@@ -71,19 +71,6 @@ void AMyTempleRunCharacter::BeginPlay()
 	}
 }
 
-ABaseWeapon* AMyTempleRunCharacter::SpawnWeapon(UClass* InputWeaponClass)
-{
-	FActorSpawnParameters spawnParams;
-	spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-
-	return GetWorld()->SpawnActor<ABaseWeapon>(InputWeaponClass, spawnParams);
-}
-
-void AMyTempleRunCharacter::AttachWeapon(const FName& InputEquipSocketName, ABaseWeapon* InputWeapon)
-{
-	InputWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, InputEquipSocketName);
-}
-
 //////////////////////////////////////////////////////////////////////////
 // Input
 
@@ -96,15 +83,11 @@ void AMyTempleRunCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 
-		EnhancedInputComponent->BindAction(UnequipAction, ETriggerEvent::Triggered, this, &AMyTempleRunCharacter::Unequip);
-
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMyTempleRunCharacter::Move);
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMyTempleRunCharacter::Look);
-
-		EnhancedInputComponent->BindAction(EquipAction, ETriggerEvent::Triggered, this, &AMyTempleRunCharacter::Equip);
 	}
 	else
 	{
@@ -148,12 +131,15 @@ void AMyTempleRunCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
-void AMyTempleRunCharacter::Equip(const FInputActionValue& Value)
+ABaseWeapon* AMyTempleRunCharacter::SpawnWeapon(UClass* InputWeaponClass)
 {
+	FActorSpawnParameters spawnParams;
+	spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
+	return GetWorld()->SpawnActor<ABaseWeapon>(InputWeaponClass, spawnParams);
 }
 
-void AMyTempleRunCharacter::Unequip(const FInputActionValue& Value)
+void AMyTempleRunCharacter::AttachWeapon(const FName& InputEquipSocketName, ABaseWeapon* InputWeapon)
 {
-
+	InputWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, InputEquipSocketName);
 }
