@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "MyTempleRun/MyTempleRun.h"
 #include "BaseWeapon.generated.h"
 
 UCLASS()
@@ -23,9 +24,13 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Socket)
+private:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Socket, meta = (AllowPrivateAccess = "true"))
 	TArray<FName> EquipSocketNames;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Damage)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Damage, meta = (AllowPrivateAccess = "true"))
 	float Damage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Weapon, meta = (AllowPrivateAccess = "true"))
+	EWeaponType WeaponType;
 };
