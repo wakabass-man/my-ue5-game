@@ -15,3 +15,11 @@ enum class EItemType : uint8
 	Coin,
 	MAX
 };
+
+UENUM(BlueprintType)
+enum class EWeaponType : uint8
+{
+	Rifle,
+	Wire,
+	MAX
+};

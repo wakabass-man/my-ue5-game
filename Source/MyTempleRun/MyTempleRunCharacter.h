@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "MyTempleRun/MyTempleRun.h"
 #include "MyTempleRunCharacter.generated.h"
 
 class USpringArmComponent;
@@ -47,6 +48,9 @@ class AMyTempleRunCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* JumpAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Weapon, meta = (AllowPrivateAccess = "true"))
+	EWeaponType WeaponType;
+
 public:
 	AMyTempleRunCharacter();
 	
@@ -63,7 +67,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Inventory)
 	TArray<ABaseItem*> Inventory;
 
-protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
