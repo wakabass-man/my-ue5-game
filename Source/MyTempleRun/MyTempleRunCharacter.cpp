@@ -59,7 +59,7 @@ AMyTempleRunCharacter::AMyTempleRunCharacter()
 	AimTimeline->AddInterpFloat(AimCurve, TimelineHandler);
 	AimTimeline->SetLooping(false);
 
-	TimelineHandler.BindUFunction(this, FName("Aiming"));
+	TimelineHandler.BindUFunction(this, FName(TEXT("Aiming"))); 
 
 	PrimaryActorTick.bCanEverTick = true;
 }
@@ -166,5 +166,6 @@ void AMyTempleRunCharacter::AimSwitching(bool Switch)
 
 void AMyTempleRunCharacter::Aiming(float Alpha)
 {
-	CameraBoom->SocketOffset.X += Alpha;
+	CameraBoom->SocketOffset.X += Alpha*2;
+	GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, TEXT("AimSwitching"));
 }
