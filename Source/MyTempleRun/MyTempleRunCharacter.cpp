@@ -133,6 +133,12 @@ void AMyTempleRunCharacter::Look(const FInputActionValue& Value)
 
 	if (Controller != nullptr)
 	{
+		/*float cumulXval = 0.f;
+		float cumulYval = 0.f;*/
+
+		/*float newXval = FMath::ClampAngle(LookAxisVector.X, -90.0, 90.0);
+		float newYval = FMath::ClampAngle(LookAxisVector.Y, -90.0, 90.0);*/
+
 		// add yaw and pitch input to controller
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
