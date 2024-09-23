@@ -55,11 +55,6 @@ AMyTempleRunCharacter::AMyTempleRunCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
-	AimTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("TimelineComponent"));
-	AimTimeline->AddInterpFloat(AimCurve, TimelineHandler);
-	AimTimeline->SetLooping(false);
-
-	TimelineHandler.BindUFunction(this, FName(TEXT("Aiming"))); 
 
 	PrimaryActorTick.bCanEverTick = true;
 }
@@ -156,22 +151,4 @@ ABaseWeapon* AMyTempleRunCharacter::SpawnWeapon(UClass* InputWeaponClass)
 void AMyTempleRunCharacter::AttachWeapon(const FName& InputEquipSocketName, ABaseWeapon* InputWeapon)
 {
 	InputWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, InputEquipSocketName);
-}
-
-void AMyTempleRunCharacter::AimSwitching(bool Switch)
-{
-	if (Switch)
-	{
-		AimTimeline->Play();
-	}
-	else
-	{
-		AimTimeline->Reverse();
-	}
-}
-
-void AMyTempleRunCharacter::Aiming(float Alpha)
-{
-	CameraBoom->SocketOffset.X += Alpha*2;
-	GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, TEXT("AimSwitching"));
 }
