@@ -145,6 +145,8 @@ ABaseWeapon* AMyTempleRunCharacter::SpawnWeapon(UClass* InputWeaponClass)
 	FActorSpawnParameters spawnParams;
 	spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
+	GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Blue, TEXT(" Screen"));
+
 	return GetWorld()->SpawnActor<ABaseWeapon>(InputWeaponClass, spawnParams);
 }
 

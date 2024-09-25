@@ -22,5 +22,4 @@ enum class EWeaponType : uint8
 	Rifle,
 	Wire,
 	MAX
-};
-
+}; 

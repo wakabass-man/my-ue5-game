@@ -21,12 +21,12 @@ struct FCameraSettingStruct
 {
 	GENERATED_USTRUCT_BODY()
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = CameraSetting)
+	UPROPERTY(EditAnyWhere, BlueprintReadWrite, Category = CameraSetting, meta = (AllowPrivateAccess = "true"))
 	float TargetArmLength;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = CameraSetting)
+	UPROPERTY(EditAnyWhere, BlueprintReadWrite, Category = CameraSetting, meta = (AllowPrivateAccess = "true"))
 	FVector SocketOffset;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = CameraSetting)
+	UPROPERTY(EditAnyWhere, BlueprintReadWrite, Category = CameraSetting, meta = (AllowPrivateAccess = "true"))
 	FVector CameraBoomRelativeLocation;
 };
