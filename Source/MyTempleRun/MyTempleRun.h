@@ -23,3 +23,12 @@ enum class EWeaponType : uint8
 	Wire,
 	MAX
 }; 
+
+UENUM(BlueprintType)
+enum class ECameraSetting : uint8
+{
+	Unequip,
+	RifleEquip,
+	RifleAim,
+	MAX
+};
