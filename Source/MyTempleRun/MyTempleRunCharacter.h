@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
-#include "Components/TimelineComponent.h"
+//#include "Components/TimelineComponent.h"
 #include "MyTempleRunCharacter.generated.h"
 
 class USpringArmComponent;
@@ -47,9 +47,6 @@ class AMyTempleRunCharacter : public ACharacter
 	/** Look Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* JumpAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UTimelineComponent* TimelineComponent;
 
 public:
 	AMyTempleRunCharacter();
