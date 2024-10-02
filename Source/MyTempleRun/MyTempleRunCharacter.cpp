@@ -100,6 +100,11 @@ void AMyTempleRunCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 void AMyTempleRunCharacter::Move(const FInputActionValue& Value)
 {
+	if (GetCharacterMovement()->IsFalling())
+	{
+		return;
+	}
+
 	// input is a Vector2D
 	FVector2D MovementVector = Value.Get<FVector2D>();
 
