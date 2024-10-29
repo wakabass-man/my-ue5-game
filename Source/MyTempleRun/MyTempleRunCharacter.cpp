@@ -63,8 +63,7 @@ AMyTempleRunCharacter::AMyTempleRunCharacter()
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
-	AttributeSet = CreateDefaultSubobject<UMyAttributeSet>(TEXT("AttributeSet"));
-
+	AttributeSet = AbilitySystemComponent->GetSet<UMyAttributeSet>();
 }
 
 void AMyTempleRunCharacter::BeginPlay()

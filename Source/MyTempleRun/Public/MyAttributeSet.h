@@ -17,7 +17,7 @@
  * 
  */
 UCLASS()
-class MYTEMPLERUN_API UMyAttributeSet : public UAttributeSet
+class MYTEMPLERUN_API UMyAttributeSet : public UAttributeSet //GAS에서 사용되는 사용자 정의 속성 세트
 {
 	GENERATED_BODY()
 	

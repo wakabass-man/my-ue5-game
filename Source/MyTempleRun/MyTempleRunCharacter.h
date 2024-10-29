@@ -59,7 +59,7 @@ public:
 	UAbilitySystemComponent* AbilitySystemComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
-	UMyAttributeSet* AttributeSet;
+	const UMyAttributeSet* AttributeSet;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
 	float MaxHealth = 100.f;
