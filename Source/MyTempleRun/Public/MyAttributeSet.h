@@ -17,7 +17,7 @@
  * 
  */
 UCLASS()
-class MYTEMPLERUN_API UMyAttributeSet : public UAttributeSet //GAS에서 사용되는 사용자 정의 속성 세트
+class MYTEMPLERUN_API UMyAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()
 	
@@ -40,11 +40,9 @@ public:
 	UFUNCTION()
 	virtual void OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth);
 
-	UPROPERTY(BlueprintReadWrite, Category = "Attributes", ReplicatedUsing = OnRep_Damage)
+	UPROPERTY(BlueprintReadWrite, Category = "Attributes")
 	FGameplayAttributeData Damage;
 	ATTRIBUTE_ACCESSORS(UMyAttributeSet, Damage);
-	UFUNCTION()
-	virtual void OnRep_Damage(const FGameplayAttributeData& OldDamage);
 
 	UPROPERTY(BlueprintReadWrite, Category = "Attributes", ReplicatedUsing = OnRep_Armor)
 	FGameplayAttributeData Armor;

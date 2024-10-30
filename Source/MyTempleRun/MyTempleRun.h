@@ -32,3 +32,11 @@ enum class ECameraSetting : uint8
 	RifleAim,
 	MAX
 };
+
+UENUM(BlueprintType)
+enum class AbilityID : uint8
+{
+	None UMETA(DisplayName = "None"),
+	Confirm UMETA(DisplayName = "Confirm"),
+	Cancel UMETA(DisplayName = "Cancel")
+};

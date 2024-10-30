@@ -35,8 +35,6 @@ void UMyAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallback
 	FGameplayTagContainer TagContainer;
 	Data.EffectSpec.GetAllAssetTags(TagContainer);
 
-	//이미 이펙트에 의해서 체력이 변경된 상태?
-	//어트리뷰트 초기화는 따로 안하는지
 	if (Data.EvaluatedData.Attribute == GetHealthAttribute())
 	{
 		SetHealth(FMath::Clamp(GetHealth(), 0.f, GetMaxHealth()));
@@ -87,7 +85,6 @@ void UMyAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 	DOREPLIFETIME_CONDITION_NOTIFY(UMyAttributeSet, Health, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMyAttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMyAttributeSet, Armor, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(UMyAttributeSet, Damage, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMyAttributeSet, Strength, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMyAttributeSet, Pliability, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMyAttributeSet, XP, COND_None, REPNOTIFY_Always);
@@ -104,11 +101,6 @@ void UMyAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth)
 void UMyAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth)
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UMyAttributeSet, MaxHealth, OldMaxHealth);
-}
-
-void UMyAttributeSet::OnRep_Damage(const FGameplayAttributeData& OldDamage)
-{
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UMyAttributeSet, Damage, OldDamage);
 }
 
 void UMyAttributeSet::OnRep_Armor(const FGameplayAttributeData& OldArmor)
