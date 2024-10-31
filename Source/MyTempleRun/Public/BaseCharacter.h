@@ -18,7 +18,7 @@ class MYTEMPLERUN_API ABaseCharacter : public ACharacter, public IAbilitySystemI
 
 public:
 	// Sets default values for this character's properties
-	ABaseCharacter(const class FObjectInitializer& Initializer);
+	ABaseCharacter();
 
 public:
 	class UMyAbilitySystemComponent* ASC;

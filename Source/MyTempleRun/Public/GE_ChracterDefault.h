@@ -4,14 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameplayEffect.h"
-#include "GE_BaseTakeDamage.generated.h"
+#include "GE_ChracterDefault.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class MYTEMPLERUN_API UGE_BaseTakeDamage : public UGameplayEffect
+class MYTEMPLERUN_API UGE_ChracterDefault : public UGameplayEffect
 {
 	GENERATED_BODY()
 	
+	UGE_ChracterDefault();
 };

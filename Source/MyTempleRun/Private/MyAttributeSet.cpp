@@ -7,18 +7,6 @@
 
 UMyAttributeSet::UMyAttributeSet()
 {
-	Health = 100.f;
-	MaxHealth = 100.f;
-	Damage = 10.f;
-	Armor = 0.f;
-	Strength = 0.f;
-	
-	Pliability = 0.f;
-	XP = 0.f;
-	Level = 1.f;
-	SP = 0.f;
-	Money = 0.f;
-
 	/*InitHealth(100.f);
 	InitMaxHealth(100.f);
 	InitDamage(10.f);
@@ -103,6 +91,7 @@ void UMyAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 	DOREPLIFETIME_CONDITION_NOTIFY(UMyAttributeSet, Armor, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMyAttributeSet, Strength, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMyAttributeSet, Pliability, COND_None, REPNOTIFY_Always);
+
 	DOREPLIFETIME_CONDITION_NOTIFY(UMyAttributeSet, XP, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMyAttributeSet, Level, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UMyAttributeSet, SP, COND_None, REPNOTIFY_Always);

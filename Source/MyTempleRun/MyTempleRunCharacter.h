@@ -4,11 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "Logging/LogMacros.h"
-//#include "Components/TimelineComponent.h"
-#include "GamePlayTagContainer.h"
-#include <GamePlayEffectTypes.h>
-#include "AbilitySystemInterface.h"
+#include "BaseCharacter.h"
 #include "MyTempleRunCharacter.generated.h"
 
 class USpringArmComponent;
@@ -16,15 +12,11 @@ class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
-//class ARushProjectile;
-class ABaseItem;
-class ABaseWeapon;
-class UMyAttributeSet;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 UCLASS(config = Game)
-class AMyTempleRunCharacter : public ACharacter, public IAbilitySystemInterface
+class AMyTempleRunCharacter : public ABaseCharacter
 {
 	GENERATED_BODY()
 
@@ -52,29 +44,7 @@ class AMyTempleRunCharacter : public ACharacter, public IAbilitySystemInterface
 	UInputAction* JumpAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Inventory, meta = (AllowPrivateAccess = "true"))
-	TArray<ABaseItem*> Inventory;
-
-public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Abilities")
-	UAbilitySystemComponent* AbilitySystemComponent;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
-	const UMyAttributeSet* AttributeSet;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
-	float MaxHealth = 100.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
-	float MaxStrength = 100.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
-	float MaxPliability = 100.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
-	TSubclassOf<class UGameplayEffect> GameplayEffect;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
-	TArray<TSubclassOf<class UGameplayAbility>> GameplayAbilityArray;
+	TArray<class ABaseItem*> Inventory;
 
 public:
 	AMyTempleRunCharacter();
@@ -95,16 +65,6 @@ protected:
 	// To add mapping context
 	virtual void BeginPlay();
 
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-
-	virtual void PossessedBy(AController* NewController) override;
-
-	virtual void OnRep_PlayerState() override;
-
-	virtual void InitAttributes();
-
-	virtual void SetDefaultAbilities();
-
 public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
@@ -114,8 +74,8 @@ public:
 	/*FORCEINLINE TArray<ABaseItem*>& GetInventory() { return Inventory; }*/
 
 	UFUNCTION(BlueprintCallable)
-	void AttachWeapon(const FName& InputEquipSocketName, ABaseWeapon* InputWeapon);
+	void AttachWeapon(const FName& InputEquipSocketName, class ABaseWeapon* InputWeapon);
 
 	UFUNCTION(BlueprintCallable)
-	ABaseWeapon* SpawnWeapon(UClass* InputWeaponClass);
+	class ABaseWeapon* SpawnWeapon(UClass* InputWeaponClass);
 };

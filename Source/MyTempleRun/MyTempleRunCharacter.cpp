@@ -12,8 +12,6 @@
 #include "InputActionValue.h"
 #include "BaseItem.h"
 #include "BaseWeapon.h"
-#include "AbilitySystemComponent.h"
-#include "MyAttributeSet.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -58,12 +56,6 @@ AMyTempleRunCharacter::AMyTempleRunCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 
 	PrimaryActorTick.bCanEverTick = true;
-
-	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
-	AbilitySystemComponent->SetIsReplicated(true);
-	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
-
-	AttributeSet = AbilitySystemComponent->GetSet<UMyAttributeSet>();
 }
 
 void AMyTempleRunCharacter::BeginPlay()
@@ -78,83 +70,6 @@ void AMyTempleRunCharacter::BeginPlay()
 		{
 			Subsystem->AddMappingContext(InputMappingContext, 0);
 		}
-	}
-}
-
-UAbilitySystemComponent* AMyTempleRunCharacter::GetAbilitySystemComponent() const
-{
-	return AbilitySystemComponent;
-}
-
-void AMyTempleRunCharacter::PossessedBy(AController* NewController)
-{
-	Super::PossessedBy(NewController);
-
-	if (AbilitySystemComponent)
-	{
-		AbilitySystemComponent->InitAbilityActorInfo(this, this);
-		InitAttributes();
-		SetDefaultAbilities();
-	}
-	else
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("AMyTempleRunCharacter::PossessedBy()"));
-	}
-}
-
-void AMyTempleRunCharacter::OnRep_PlayerState()
-{
-	Super::OnRep_PlayerState();
-
-	if (AbilitySystemComponent)
-	{
-		AbilitySystemComponent->InitAbilityActorInfo(this, this);
-		InitAttributes();
-	}
-	else
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("AMyTempleRunCharacter::OnRep_PlayerState()"));
-	}
-}
-
-void AMyTempleRunCharacter::InitAttributes()
-{
-	if (AbilitySystemComponent)
-	{
-		if (GameplayEffect)
-		{
-			FGameplayEffectContextHandle GameplayEffectContextHandle = AbilitySystemComponent->MakeEffectContext();
-			GameplayEffectContextHandle.AddSourceObject(this);
-			FGameplayEffectSpecHandle GameplayEffectSpecHandle = AbilitySystemComponent->MakeOutgoingSpec(GameplayEffect, 1, GameplayEffectContextHandle);
-			FActiveGameplayEffectHandle GameplayEffectHandle = AbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*GameplayEffectSpecHandle.Data.Get());
-		}
-		else
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("AMyTempleRunCharacter::InitAttributes()"));
-
-			return;
-		}
-	}
-	else
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("AMyTempleRunCharacter::InitAttributes()"));
-
-		return;
-	}
-}
-
-void AMyTempleRunCharacter::SetDefaultAbilities()
-{
-	if (HasAuthority() && AbilitySystemComponent)
-	{
-		for (auto& e : GameplayAbilityArray)
-		{
-			AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(e.GetDefaultObject(), 1, 0));
-		}
-	}
-	else
-	{
-		UE_LOG(LogTemplateCharacter, Warning, TEXT("AMyTempleRunCharacter::SetDefaultAbilities()"));
 	}
 }
 
