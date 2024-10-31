@@ -5,8 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
-#include "MyTempleRun/MyTempleRun.h"
-#include "GameplayTagContainer.h"
+//#include "MyTempleRun/MyTempleRun.h"
+//#include "GameplayTagContainer.h"
 #include "BaseCharacter.generated.h"
 
 //DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParams(FCharacterDiedDelegate, ABaseCharacter*, Character);
@@ -21,11 +21,18 @@ public:
 	ABaseCharacter(const class FObjectInitializer& Initializer);
 
 public:
-	/*UPROPERTY(BlueprintAssignable, Category = "My|Delegate Structure")
-	FCharacterDiedDelegate DieDelegate;*/
-
 	class UMyAbilitySystemComponent* ASC;
 	class UMyAttributeSet* AttriSet;
+	class AMyPlayerState* PlayerState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My|Ability")
+	TArray<TSubclassOf<class UGameplayAbility>> AbilityArray;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My|Effect")
+	TArray<TSubclassOf<class UGameplayEffect>> DefaultAttriEffectArray;
+
+	/*UPROPERTY(BlueprintAssignable, Category = "My|Delegate Structure")
+	FCharacterDiedDelegate DieDelegate;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My|Tag")
 	FGameplayTag DeadTag;
@@ -43,10 +50,7 @@ public:
 	TSubclassOf<class UGameplayEffect> DefaultEffect;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My|Effect")
-	TArray<TSubclassOf<class UGameplayEffect>> DefaultEffectArray;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My|Ability")
-	TArray<TSubclassOf<class UGameplayAbility>> AbilityArray;
+	TArray<TSubclassOf<class UGameplayEffect>> DefaultEffectArray;*/
 
 protected:
 	// Called when the game starts or when spawned
@@ -59,7 +63,17 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UFUNCTION(BlueprintCallable)
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+	virtual void PossessedBy(AController* NewController) override;
+
+	virtual void OnRep_PlayerState() override;
+
+	void GiveDefaultAbilities();
+
+	void InitDefaultAttributes();
+
+	/*UFUNCTION(BlueprintCallable)
 	virtual bool IsAlive() const;
 
 	UFUNCTION(BlueprintCallable)
@@ -93,7 +107,5 @@ public:
 	virtual void SetHealth(float Health) const;
 
 	UFUNCTION(BlueprintCallable)
-	virtual void SetMaxHealth(float MaxHealth) const;
-
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	virtual void SetMaxHealth(float MaxHealth) const;*/
 };

@@ -18,11 +18,28 @@ UMyAttributeSet::UMyAttributeSet()
 	Level = 1.f;
 	SP = 0.f;
 	Money = 0.f;
+
+	/*InitHealth(100.f);
+	InitMaxHealth(100.f);
+	InitDamage(10.f);
+	InitArmor(0.f);
+	InitStrength(0.f);
+
+	InitPliability(0.f);
+	InitXP(0.f);
+	InitLevel(1.f);
+	InitSP(0.f);
+	InitMoney(0.f);*/
 }
 
 void UMyAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
 {
 	Super::PreAttributeChange(Attribute, NewValue);
+
+	if (Attribute == GetHealthAttribute())
+	{
+		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
+	}
 }
 
 void UMyAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
@@ -37,8 +54,7 @@ void UMyAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallback
 
 	if (Data.EvaluatedData.Attribute == GetHealthAttribute())
 	{
-		SetHealth(FMath::Clamp(GetHealth(), 0.f, GetMaxHealth()));
-		/*HealthChangeDelegate.Broadcast(GetHealth(), Data.EffectSpec.StackCount);*/
+		SetHealth(GetHealth());
 	}
 	else if (Data.EvaluatedData.Attribute == GetMaxHealthAttribute())
 	{
