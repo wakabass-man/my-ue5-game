@@ -12,7 +12,7 @@ ABaseCharacter::ABaseCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 	ASC = CreateDefaultSubobject<UMyAbilitySystemComponent>(TEXT("Ability System Component"));
-	AttriSet = CreateDefaultSubobject<UMyAttributeSet>(TEXT("Attribute Set"));
+	AttributeSet = CreateDefaultSubobject<UMyAttributeSet>(TEXT("Attribute Set"));
 
 }
 

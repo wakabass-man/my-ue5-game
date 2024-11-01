@@ -22,7 +22,7 @@ public:
 
 public:
 	class UMyAbilitySystemComponent* ASC;
-	class UMyAttributeSet* AttriSet;
+	class UMyAttributeSet* AttributeSet;
 	class AMyPlayerState* PlayerState;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My|Ability")
@@ -72,6 +72,8 @@ public:
 	void GiveDefaultAbilities();
 
 	void InitDefaultAttributes();
+
+	inline class UMyAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
 	/*UFUNCTION(BlueprintCallable)
 	virtual bool IsAlive() const;

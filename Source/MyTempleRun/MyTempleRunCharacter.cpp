@@ -12,6 +12,8 @@
 #include "InputActionValue.h"
 #include "BaseItem.h"
 #include "BaseWeapon.h"
+#include "MyPlayerController.h"
+#include "MyHUD.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -58,6 +60,17 @@ AMyTempleRunCharacter::AMyTempleRunCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
+void AMyTempleRunCharacter::InitHUD(APlayerController* PlayerController)
+{
+	auto PC = Cast<AMyPlayerController>(PlayerController);
+	ensure(PC);
+
+	auto HUD = Cast<AMyHUD>(PC->GetHUD());
+	ensure(HUD);
+
+	HUD->Init(PC);
+}
+
 void AMyTempleRunCharacter::BeginPlay()
 {
 	// Call the base class  
@@ -70,7 +83,16 @@ void AMyTempleRunCharacter::BeginPlay()
 		{
 			Subsystem->AddMappingContext(InputMappingContext, 0);
 		}
+
+		InitHUD(PlayerController);
 	}
+
+	/*if (HasAuthority())
+	{
+		
+	}*/
+
+	
 }
 
 //////////////////////////////////////////////////////////////////////////

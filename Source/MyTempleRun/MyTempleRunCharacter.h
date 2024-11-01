@@ -78,4 +78,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	class ABaseWeapon* SpawnWeapon(UClass* InputWeaponClass);
+
+	UFUNCTION(BlueprintCallable)
+	void InitHUD(APlayerController* PlayerController);
 };

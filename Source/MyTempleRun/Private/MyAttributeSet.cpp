@@ -40,7 +40,7 @@ void UMyAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallback
 	FGameplayTagContainer TagContainer;
 	Data.EffectSpec.GetAllAssetTags(TagContainer);
 
-	if (Data.EvaluatedData.Attribute == GetHealthAttribute())
+	/*if (Data.EvaluatedData.Attribute == GetHealthAttribute())
 	{
 		SetHealth(GetHealth());
 	}
@@ -79,7 +79,7 @@ void UMyAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallback
 	else if (Data.EvaluatedData.Attribute == GetMoneyAttribute())
 	{
 		SetMoney(GetMoney());
-	}
+	}*/
 }
 
 void UMyAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
