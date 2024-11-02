@@ -63,11 +63,8 @@ AMyTempleRunCharacter::AMyTempleRunCharacter()
 void AMyTempleRunCharacter::InitHUD(APlayerController* PlayerController)
 {
 	auto PC = Cast<AMyPlayerController>(PlayerController);
-	ensure(PC);
-
 	auto HUD = Cast<AMyHUD>(PC->GetHUD());
-	ensure(HUD);
-
+	
 	HUD->Init(PC);
 }
 
@@ -86,13 +83,6 @@ void AMyTempleRunCharacter::BeginPlay()
 
 		InitHUD(PlayerController);
 	}
-
-	/*if (HasAuthority())
-	{
-		
-	}*/
-
-	
 }
 
 //////////////////////////////////////////////////////////////////////////

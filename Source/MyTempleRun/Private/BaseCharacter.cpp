@@ -39,8 +39,6 @@ void ABaseCharacter::BeginPlay()
 
 UAbilitySystemComponent* ABaseCharacter::GetAbilitySystemComponent() const
 {
-	ensure(ASC);
-
 	return ASC;
 }
 
@@ -62,8 +60,6 @@ void ABaseCharacter::OnRep_PlayerState()
 
 void ABaseCharacter::GiveDefaultAbilities()
 {
-	ensure(ASC);
-
 	for (TSubclassOf<class UGameplayAbility> e : AbilityArray)
 	{
 		FGameplayAbilitySpec AbilitySpec(e, 1);
@@ -73,18 +69,18 @@ void ABaseCharacter::GiveDefaultAbilities()
 
 void ABaseCharacter::InitDefaultAttributes()
 {
-	ensure(ASC);
-	ensure(DefaultAttriEffectArray.Num() > 0);
-
-	auto ContextHandle = ASC->MakeEffectContext();
-	ContextHandle.AddSourceObject(this);
-
-	for (auto e : DefaultAttriEffectArray)
+	if (DefaultAttriEffectArray.Num() > 0) 
 	{
-		auto SpecHandle = ASC->MakeOutgoingSpec(e, 1, ContextHandle);
+		auto ContextHandle = ASC->MakeEffectContext();
+		ContextHandle.AddSourceObject(this);
 
-		//GE 적용
-		ASC->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
+		for (auto e : DefaultAttriEffectArray)
+		{
+			auto SpecHandle = ASC->MakeOutgoingSpec(e, 1, ContextHandle);
+
+			//GE 적용
+			ASC->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
+		}
 	}
 }
 

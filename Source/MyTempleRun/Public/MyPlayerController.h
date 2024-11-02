@@ -14,4 +14,7 @@ class MYTEMPLERUN_API AMyPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
+public:
+	
+	virtual void OnPossess(APawn* InPawn) override;
 };

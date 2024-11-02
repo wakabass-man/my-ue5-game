@@ -7,12 +7,13 @@
 
 void AMyHUD::Init(APlayerController* PlayerController)
 {
-	ensure(UserWidgetArray.Num() > 0);
-	/*UHealthUserWidget* Widget = nullptr;*/
-	for (const auto& e : UserWidgetArray)
+	if (UserWidgetArray.Num() > 0)
 	{
-		auto Widget = CreateWidget<UHealthUserWidget>(PlayerController, e);
-		Widget->BindToAttribute(PlayerController);
-		Widget->AddToViewport();
+		for (const auto& e : UserWidgetArray)
+		{
+			auto Widget = CreateWidget<UHealthUserWidget>(PlayerController, e);
+			Widget->BindToAttribute(PlayerController);
+			Widget->AddToViewport();
+		}
 	}
 }
